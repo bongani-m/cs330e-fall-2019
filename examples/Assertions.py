@@ -4,7 +4,7 @@
 # Assertions.py
 # -------------
 
-# https://docs.python.org/3.4/reference/simple_stmts.html#grammar-token-assert_stmt
+# https://docs.python.org/3/reference/simple_stmts.html#grammar-token-assert-stmt
 
 def cycle_length (n) :
     assert n > 0
@@ -27,18 +27,19 @@ assert cycle_length(10) == 7
 print("Done.")
 
 """ #pragma: no cover
-% python3.5 Assertions.py
+$ python3 Assertions.py
 Assertions.py
 Traceback (most recent call last):
-  File "./Assertions.py", line 23, in <module>
+  File "Assertions.py", line 23, in <module>
     assert cycle_length( 1) == 1
-  File "./Assertions.py", line 18, in cycle_length
+  File "Assertions.py", line 18, in cycle_length
     assert c > 0
 AssertionError
 
 
 
-% python3.5 -O Assertions.py
+
+% python3 -O Assertions.py
 Assertions.py
 Done.
 """
