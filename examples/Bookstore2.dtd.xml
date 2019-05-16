@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+
+<!--
+Bookstore with DTD (Document Type Definition) using ID/IDREFs
+
+% xmllint 2-noout Bookstore2.dtd.xml
+%
+
+
+
+% xmllint 2-noout 2-valid Bookstore2.dtd.xml
+%
+
+
+
+Try changes:
+    Ident JU to HG
+    BookRef to HG
+    Add second BookRef in Remark
+
+*: zero or more
++: one  or more
+?: zero or one
+
+!ATTLIST: attribute list
+#CDATA:   character data
+#IMPLIED: optional
+#PCDATA:  parsed character data
+-->
+
+<!DOCTYPE Bookstore [
+   <!ELEMENT Bookstore  (Book*, Author*)>
+   <!ELEMENT Book       (Title, Remark?)>
+   <!ELEMENT Title      (#PCDATA)>
+   <!ELEMENT Remark     (#PCDATA | BookRef)*>
+   <!ELEMENT BookRef    EMPTY>
+   <!ELEMENT Author     (First_Name, Last_Name)>
+   <!ELEMENT First_Name (#PCDATA)>
+   <!ELEMENT Last_Name  (#PCDATA)>
+
+   <!ATTLIST Book ISBN    ID     #REQUIRED
+                  Price   CDATA  #REQUIRED
+                  Authors IDREFS #REQUIRED>
+
+   <!ATTLIST BookRef book  IDREF #REQUIRED>
+   <!ATTLIST Author  Ident ID    #REQUIRED>
+]>
+
+<Bookstore>
+   <Book ISBN="ISBN-0-13-713526-2" Price="100" Authors="JU JW">
+      <Title>A First Course in Database Systems</Title>
+   </Book>
+   <Book ISBN="ISBN-0-13-815504-6" Price="85" Authors="HG JU JW">
+      <Title>Database Systems: The Complete Book</Title>
+      <Remark>
+         Amazon.com says: Buy this book bundled with
+         <BookRef book="ISBN-0-13-713526-2" /> - a great deal!
+      </Remark>
+   </Book>
+   <Author Ident="HG">
+      <First_Name>Hector</First_Name>
+      <Last_Name>Garcia-Molina</Last_Name>
+   </Author>
+   <Author Ident="JU">
+      <First_Name>Jeffrey</First_Name>
+      <Last_Name>Ullman</Last_Name>
+   </Author>
+   <Author Ident="JW">
+      <First_Name>Jennifer</First_Name>
+      <Last_Name>Widom</Last_Name>
+   </Author>
+</Bookstore>
