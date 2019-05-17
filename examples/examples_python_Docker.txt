@@ -1,0 +1,194 @@
+# https://docker-curriculum.com/
+# https://docs.docker.com/edge/engine/reference/commandline/docker/
+
+PS C:\Users\Fares\Documents\demo> docker --version
+Docker version 18.09.0, build 4d60db4
+
+
+
+PS C:\Users\Fares\Documents\demo> docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED
+
+
+
+PS C:\Users\Fares\Documents\demo> cat Dockerfile
+FROM python:3
+
+RUN apt-get update            && \
+    apt-get -y install vim    && \
+    apt-get install -y dos2unix
+
+RUN pip install --upgrade pip && \
+    pip --version             && \
+    pip install autopep8      && \
+    pip install coverage      && \
+    pip install mypy          && \
+    pip install pylint        && \
+    pip install numpy         && \
+    pip list
+
+CMD bash
+
+
+
+# --tag , -t: Name and optionally a tag in the ‘name:tag’ format
+PS C:\Users\Fares\Documents\demo> docker build -t fareszf/python .
+...
+
+
+
+PS C:\Users\Fares\Documents\demo> docker login
+...
+
+
+
+PS C:\Users\Fares\Documents\demo> docker push fareszf/python
+...
+
+
+
+PS C:\Users\Fares\Documents\demo> docker pull fareszf/python
+...
+
+
+
+PS C:\Users\Fares\Documents\demo> docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+fareszf/python      latest              254ef3642315        3 minutes ago       1.07GB
+python              3                   1e80caffd59e        4 weeks ago         923MB
+
+
+
+PS C:\Users\Fares\Documents\demo> pwd
+
+Path
+----
+C:\Users\Fares\Documents\gitlab\cs329e-netflix-docker
+
+
+% ls
+PS C:\Users\Fares\Documents\demo> ls
+
+
+    Directory: C:\Users\Fares\Documents\demo
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       12/19/2018  12:58 PM            385 Dockerfile
+
+
+# -it flag starts the container in the interactive mode.  
+# -v  flag mounts the current working directory into the container. 
+# -w  flag specifies working directory inside the container. 
+PS C:\Users\Fares\Documents\demo> docker run -it -v c:/Users/Fares/Documents/demo:/usr/cs330 -w /usr/cs330 fareszf/python
+root@781472f49e65:/usr/cs373# pwd
+/usr/cs373
+root@781472f49e65:/usr/cs373#
+
+
+
+root@781472f49e65:/usr/cs373# ls
+Dockerfile
+
+
+root@781472f49e65:/usr/cs373# which coverage
+/usr/local/bin/coverage
+
+
+
+root@781472f49e65:/usr/cs373# coverage --version
+Coverage.py, version 4.5.2 with C extension
+Documentation at https://coverage.readthedocs.io
+
+
+
+root@781472f49e65:/usr/cs373# which git
+/usr/bin/git
+
+
+
+root@781472f49e65:/usr/cs373# git --version
+git version 2.11.0
+
+
+
+root@781472f49e65:/usr/cs373# which make
+/usr/bin/make
+
+
+
+root@781472f49e65:/usr/cs373# make --version
+GNU Make 4.1
+Built for x86_64-pc-linux-gnu
+Copyright (C) 1988-2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+
+root@781472f49e65:/usr/cs373# which pip
+/usr/local/bin/pip
+
+
+
+root@781472f49e65:/usr/cs373# pip --version
+pip 18.1 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)
+root@781472f49e65:/usr/cs373#
+
+
+
+root@781472f49e65:/usr/cs373# pip list
+Package           Version
+----------------- -------
+astroid           2.1.0
+autopep8          1.4.3
+coverage          4.5.2
+isort             4.3.4
+lazy-object-proxy 1.3.1
+mccabe            0.6.1
+mypy              0.650
+mypy-extensions   0.4.1
+numpy             1.15.4
+pip               18.1
+pycodestyle       2.4.0
+pylint            2.2.2
+setuptools        40.6.2
+six               1.12.0
+typed-ast         1.1.1
+wheel             0.32.2
+wrapt             1.10.11
+
+
+
+root@781472f49e65:/usr/cs373# which pylint
+/usr/local/bin/pylint
+
+
+
+root@781472f49e65:/usr/cs373# pylint --version
+pylint 2.2.2
+astroid 2.1.0
+Python 3.7.1 (default, Nov 16 2018, 22:26:09)
+[GCC 6.3.0 20170516]
+
+
+
+root@781472f49e65:/usr/cs373# which python
+/usr/local/bin/python
+
+
+
+root@781472f49e65:/usr/cs373# python --version
+Python 3.7.1
+
+
+
+root@781472f49e65:/usr/cs373# which vim
+/usr/bin/vim
+
+
+
+root@781472f49e65:/usr/cs373# vim --version
+VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Sep 30 2017 18:21:38)
+....
