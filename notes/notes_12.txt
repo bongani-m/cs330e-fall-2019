@@ -1,0 +1,118 @@
+>>> def make_inc_b (j) :
+...     return lambda i : i + j
+...
+>>>
+>>> x = make_inc_b(1)(2)
+>>> x
+3
+>>> def make_inc_b (j, k) :
+...     return lambda i : i + j + k
+...
+>>> x = make_inc_b(1,2)(2)
+>>> x
+5
+>>> def make_inc_b (j) :
+...     return lambda i, k : i + k + j
+...
+>>> x = make_inc_b(1)(2,3)
+>>> x
+6
+>>>
+
+functions.py
+------------
+Lines 54-55, define make_inc_b() that receives a variable, j, and returns a lambda function which receives a variable, i, and adds it to j.
+Question? how can lambda body refers to j when it's returned?
+This is a closure where lambda copies j, the environment it's in.
+
+Lines 69-74, create a user-defined type, the class A, that has two methods, __init__ and inc. 
+This class is similar to the lambda i : i + j above. The __init__ method defines an instance variable j 
+and the method inc receives a variable, i, and add it to j.
+
+Lines 76-77, create an instance, x, of class A and pass 1 to it (i.e., I am making a closure myself).  
+Then ensures that x is an instance of A.   
+
+Lines 79-80, stores the function x.inc in a variable inc_5 (this does not make sense in Java).
+ and ensures that inc_5 is an instance of MethodType.
+
+Lines 82-83, ensures that inc_5(2) returns 3. This case is different for function invocation 
+because self is x. Here we are also ensuring that inc_5 is applicable using map.
+
+Lines 90-94, accesses inc via the class A and stores the result in inc_6 then ensure that inc_6 is an instance 
+of FunctionType. Then, ensure that inc_6(x, 2), i.e., we are passing object x and integer 2, is 3. 
+Note that value of x is pointed to by x and by lambda. Then,  ensure that we can pass inc_6(x, y) to map. 
+Note that "lambda y : inc_6(x, y) ..." is a closure. 
+----------
+algebra
+	elements or members
+	operations
+
+integers
++, *, -, /
+
+algebras can be open or closed
+
+integers under addition, is that closed
+yes,
+subtraction, closed
+multiplication, closed
+division, not closed
+
+relational algebra
+	elements or members: relations or tables
+	operations: select, project, many flavors of join
+
+everything is closed
+
+relation or table
+
+movie table
+name, year, genre, director
+
+We need a data structure to represent the table elements. In python, we can use tuple.  
+movies = [(_,_,_,_),(_,_,_,_)] but we do not have meta data. How to solve it? 
+
+movies = [{"name" : "shane", "year" : 1949, "genre" : "western", "director" : "george stevens"},
+          {"name" : "star wars", "year" : "1977", "genre" : "western", "director" : "george lucas"}]
+•	Select
+select(relation, unary_predicate) => relation
+unary_predicate is applied to each tuple, the ones that are true will be considered. 
+
+ 
+This functionality can be implemented using 
+(1) a lambda of one argument.
+
+the movies make after 1955
+select(movies, lambda d : d["year"] > 1955)
+# goes through list of dictionaries, invoke lambda on every dict on the list, 
+returns the one that is evaluates d["year"] > 1955 to true.
+
+(2) build a function
+def foo(d): # receives a dict
+    return d["year"]>1949
+
+select(movies, foo)
+What selects needs as a second argument a function or lambda (i.e., callable).
+
+Exercises: 
+(1) build select (yield, list comprehension, filter)
+def select(r, up) # yield
+    for d in r:
+         if up(d):
+             yield d
+
+def select(r, up): # list comprehension
+    return (d for d in r if up(d))
+
+def select(r, up): # filter
+    return filter(up, r)
+
+•	build project 
+Another operation is project.
+movies = [{"name" : "shane", "year" : 1949, "genre" : "western", "director" : "george stevens"},
+                 {"name" : "star wars", "year" : "1977", "genre" : "western", "director" : "george lucas"}]
+
+project(movies, "year", "name", "genre")  # this means that we need 3 out of 4 subset of column.
+
+def project (r, *t)
+

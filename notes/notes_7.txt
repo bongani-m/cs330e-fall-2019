@@ -1,0 +1,58 @@
+iteration.py 
+Iterables:
+- an iterable is an object that you can iterate through.
+- iterables usually have the property "__getitem__" 
+  that indicates an object is indexable.
+
+>>> x=[2, 3, 4]
+>>> hasattr(x, "__iter__")
+True
+>>> hasattr(x, "__getitem__")
+True
+>>> hasattr(x, "__next__")
+False
+
+Iterators vs generators:
+- an iterator object is an object that has the "__iter__" attribute.
+- you can get an iterator out of an iterable using iter function.
+- a Generator is a function that produces 
+  a sequence of results instead of a single value.
+- every generator is an iterator.
+
+iter(): takes an iterable object and returns an iterator.
+>>> x=[2, 3, 4]
+>>> p = iter(x)
+>>> next(p)
+2
+>>> next(p)
+3
+>>> next(p)
+4
+>>> next(p)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+>>>
+-----
+
+reduce:
+------
+- reduce is a higher order function. it takes a function 
+  as one of its argument.
+- mul is a function from a module called operator. 
+  You can think of it as a wrapper for the operator '*'.
+- reduce(binary_function, sequence_of_elements[, Seed: base_case_if_seq_is_empty)]
+
+- Note that the initialization is optional. If it's present, 
+  it will be placed before the items of the iterable in the calculations. 
+  if it's not, and the iterable contain one item, it will return this one item.
+ 
+  reduce(add,[],0] #0
+  reduce(add,[])
+  error: no initial value
+
+  e.g., reduce(mul, range(1, 4), 1)
+  1*1*2*3
+  e.g., reduce(add, range(1,5), 1) = 1 + 1 + 2 + 3 + 4 
+
+  write the function reduce: reduce(bf, iterable, seed) 	

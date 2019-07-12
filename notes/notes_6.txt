@@ -1,0 +1,129 @@
+Range syntax:
+-----------
+range(): returns an iterable object which produces elements on demand. 
+
+range in python3 is a generator-like object. A generator produces elements on demand 
+rather than expand an entire list into memory (like range() used to behave in Python2.x).
+ 
+The advantage for the generator version of range() is greater efficiency in it's typical use-cases 
+(e.g. iterating over them). To get the output in the usual list object, just use the list built-in 
+on them like list(range(10)). 
+-----
+
+range(stop)
+- stop: Number of integers (whole numbers) to generate, starting from zero. 
+
+range([start], stop[, step])
+
+- start: Starting number of the sequence.
+- stop: Generate numbers up to, but not including this number.
+- step: Difference between each number in the sequence.
+
+Examples of Range:
+>>> range(5)
+ range(0, 5)
+>>> list(range(5))
+ [0, 1, 2, 3, 4]
+>>>list(range(3, 6))
+ [3, 4, 5]
+>>> list(range(4, 10, 2))
+ [4,  6, 8]
+>>> list(range(4,4))
+ []
+--------
+
+Lists vs tuples: 
+- Elements of a list are wrapped using [ ]
+- But elements of tuples are wrapped using ()
+
+>>> a = [2, 3, 4]
+>>> print(type(a))
+<class 'list'>
+>>> a = [2]
+>>> print(type(a))
+<class 'list'>
+>>> a = (2, 3, 4)
+>>> print(type(a))
+<class 'tuple'>
+>>> a = (2)
+>>> type(a)
+<class 'int'> # not a tuple, to make it tuple you have to add "," after "2" as follows.
+>>> a = (2,)
+>>> print(type(a))
+<class 'tuple'>
+>>>
+---
+
+- A list is mutable: A mutable object can be altered after its creation
+- A tuple is immutable: An immutable object cannot be changed 
+but rather return a new object when attempting to update
+- Example
+# cannot change immutable objetcs
+>>>a = [4, 9]
+>>>b = (4, 9)
+>>>a[0] = 1
+>>>print(a)
+>>> [1, 9]
+>>>b[0] = 2 # error: TypeError
+# updating an immutable object results in creating a new object 
+>>> a = [2, 3, 4]
+>>> t = (5, 6.7)
+>>> a
+[2, 3, 4]
+>>> t
+(5, 6.7)
+>>> id(a) # id(): Return the “identity” of an object (the location in memory)
+20818480
+>>> id(t)
+20869448
+>>> a += [3]
+>>> t += (3,)
+>>> id(a)
+20818480
+>>> id(t)
+20844872
+# Note that list "a" is an element inside the tuple "t"
+>>> a = [2, 3, 4]
+>>> t = (5, a, 6.7) # list "a" is a member of the tuple t
+>>> a[0] = 3
+>>> a
+[3, 3, 4]
+>>> t[0]=3
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> t
+(5, [2, 3, 4, 3], 6.7, 3)
+# "a" can be changed in the sense it's a fixed address pointing to a list 
+(the contents where the pointer points to can be changed though)
+----
+
+Exception Handling
+Why do we need exception handling?
+Errors in a python module produce a trace back error and stops the execution of the module. 
+Such Errors are useful for the developers not the user. 
+Expect which sections of your code that may cause an error, put such sections inside try-except blocks. 
+If the code in the try section works, the except is skipped. Otherwise, we jump in the except section.
+
+Structure:
+-----
+try:
+	pass
+except: # This will catch all exceptions.
+	pass
+[except Exception as e:
+	print(e)] # saves exception to variable e
+else:
+	pass
+finally:
+	pass
+-----
+else is executed when the try section does not raise an exception.
+finally section is always executed (whether the code is successful or we threw an exception). can be used to release resources. 
+Sometimes we need to raise an exception manually. The command "raise" forces an error to occur.
+-----
+To be specific, "Exception" can be replaced by
+NameError
+TypeError
+...
+

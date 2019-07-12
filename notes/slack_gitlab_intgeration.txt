@@ -1,0 +1,25 @@
+Slack Notifications Service
+--------------------------
+To receive notification on Slack for activities on a GitLab project.
+On Slack:
+--------
+Slack -> apps 
+- search for “Incoming WebHooks”
+- click “install”.
+- click “Add configuration”
+- select a channel from the “Post to channel” menu
+- click “Add incoming webhook configuration”
+- you will notice a message like the following in the channel you selected
+“added an integration to this channel: incoming-webhook”
+- click on “incoming-webhok” > settings
+- Copy the “WebHook URL”
+
+On GitLab:
+---------
+Gitlab -> settings -> integration
+- look for “slack notifications” and click on it.
+- check “active” 
+- paste webhookURL at “WebHook”.
+--------
+Reference: https://docs.gitlab.com/ee/user/project/integrations/slack.html
+

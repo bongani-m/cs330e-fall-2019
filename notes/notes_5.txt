@@ -1,0 +1,10 @@
+assertEqual() is one of many kinds of assertions that unittest provides
+
+Python's self is analogous to Java's this
+
+Python's unittest has the nice property that even an internal assertion failure will not stop it 
+from running all of the tests
+
+the quality of the unit tests is essential to the usefulness of doing unit tests
+
+the Python tool, coverage, measures how many lines of your code is a unit test actually testing

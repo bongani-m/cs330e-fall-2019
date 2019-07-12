@@ -1,0 +1,49 @@
+Definitions:
+- type(x) returns from where x is instantiated
+- x.__base__ returns the base for this class
+- isinstance(x, y) asks whether x (object or class) is an instance of class y.
+  when x is an object, isinstance returns true to superclass and any other class up in the hierarachy. 
+  issubclass(x, y) asks whether the class x is a subclass of the class y.
+
+Suppose that you have the following class hierarchy.
+class Foo(object):
+   pass
+   
+class Bar(Foo):
+   pass
+
+a = Bar()
+
+Provide the values that makes the following expressions true. 
+type(Foo)     == value1 
+type(Bar)     == value2
+type(a)       == value3
+type(type)    == value4
+type(object)  == value5
+
+isinstance(Foo, type)    === value6
+isinstance(Bar, type)    === value7
+isinstance(a, Bar)       === value8
+isinstance(a, Foo)       === value9
+isinstance(Bar, Foo)     === value10
+isinstance(a, object)    === value11
+isinstance(type, object) === value12
+isinstance(Bar, object)  === value13
+isinstance(Foo, object)  === value14
+isinstance(type, type)   === value15
+isinstance(type, object) === value16
+
+
+
+Foo.__base__    == value17
+Bar.__base__    == value18
+type.__base___  == value19
+object.__base__ == value20
+
+issubclass(Bar, Foo)     == value21
+issubclass(Foo, object)  == value22
+issubclass(Bar, object)  == value23
+issubclass(type, object) == value24
+
+
+
