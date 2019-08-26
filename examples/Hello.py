@@ -13,14 +13,15 @@ print("Nothing to be done.")
 """ #pragma: no cover
 Developed in 1989 by Guido van Rossum of the Netherlands, now at Dropbox.
 Python is procedural, object-oriented, dynamically typed, and garbage collected.
-
+The following command were executed on UTCS machines (Linux)
+------------------------------------------------------------
 $ python --version
-Python 2.7.15rc1
+Python 2.7.15+
 
 
 
 $ python3 --version
-Python 3.6.7
+Python 3.6.8
 
 
 
@@ -36,8 +37,8 @@ Nothing to be done.
 
 
 $ python3
-Python 3.6.7 (default, Oct 22 2018, 11:32:17)
-[GCC 8.2.0] on linux
+Python 3.6.8 (default, Jan 14 2019, 11:02:34)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 
@@ -63,8 +64,8 @@ Nothing to be done.
 
 		
 $ python3
-Python 3.6.7 (default, Oct 22 2018, 11:32:17)
-[GCC 8.2.0] on linux
+Python 3.6.8 (default, Jan 14 2019, 11:02:34)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> help()
 
@@ -171,10 +172,9 @@ has the same effect as typing a particular string at the help> prompt.
 
 
 $ python3
-Python 3.6.7 (default, Oct 22 2018, 11:32:17)
-[GCC 8.2.0] on linux
+Python 3.6.8 (default, Jan 14 2019, 11:02:34)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
 Type "help", "copyright", "credits" or "license" for more information.
-
 
 >>> import this
 The Zen of Python, by Tim Peters
