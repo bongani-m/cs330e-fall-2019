@@ -26,7 +26,7 @@ o	''' : for a multiline comment
 • if __name__ == "__main__" :
      main()
 
-main() is executed only if the file is run directly, and not imported.
+main() is executed only if the file, which contain "main()", is run directly, and not imported.
 
 Note: __name__ is an attribute that is automatically set and has the value "__main__" only if the file is executed 
 as a script (not if it is imported as a module).
@@ -52,6 +52,6 @@ o	run the python interpreter and type in: "import Hello"
 
 •	#! /usr/bin/env python3
 o	It's a commented line for Python 
-o	Informs that OS that this file should be run by python.
+o	Informs the OS that this file should be run by python.
 In a Unix-like operating system, the program loader takes the presence of these two characters as an indication that 
 the file is a script, and tries to execute that script using the interpreter specified by the rest of the first line in the file.
