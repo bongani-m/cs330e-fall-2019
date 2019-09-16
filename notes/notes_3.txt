@@ -1,3 +1,7 @@
+In project 1, you'll work with two projects (or repos):
+- public code repo: https://gitlab.com/fareszf/cs330e-collatz.git
+- public test repo: https://gitlab.com/fareszf/cs330e-collatz-tests.git
+
 Project structure: 
 (1) Kernel: Collatz.py
 - Collatz_solve(r, w)
@@ -14,7 +18,7 @@ and will forwards the output to RunCollatz.out (rather than to the console)
 (3) Test Harness: TestCollatz.py
 Tests the methods in Collatz.py
 Read, eval, print, and solve
-r = StringIO(“…”) read from
+r = StringIO("...") read from
 w = StringIO() write to
 StringIO implements a file-like class that reads and writes a string buffer.
 w.getvalue(): reads a string from a file.
