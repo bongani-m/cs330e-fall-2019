@@ -2,6 +2,7 @@ In project 1, you'll work with two projects (or repos):
 - public code repo: https://gitlab.com/fareszf/cs330e-collatz.git
 - public test repo: https://gitlab.com/fareszf/cs330e-collatz-tests.git
 
+In Phase #1 of the project, you need to understand the struture and relationships among the given files.
 Project structure: 
 (1) Kernel: Collatz.py
 - Collatz_solve(r, w)
@@ -23,7 +24,23 @@ w = StringIO() write to
 StringIO implements a file-like class that reads and writes a string buffer.
 w.getvalue(): reads a string from a file.
 
-(4) coverage:
+(4) Unit tests vs acceptance tests
+acceptance tests are a form of black box testing
+unit tests are a form of white box testing
+
+Unit tests and acceptance tests only check valid inputs.
+
+(5) Requirements.txt
+Pip freeze > requirements.txt
+
+(6) .gitlab-ci.yml
+You need to have this file in the root of your repo, each time you push, it will automatically trigger 
+your CI pipeline.
+
+
+Classwork:
+----------
+- coverage:
      Test coverage or code coverage is used to measure the percent of your code covered by a test. 
      Coverage testing only checks whether or not a test is present. It does not check the quality of the test.
 
