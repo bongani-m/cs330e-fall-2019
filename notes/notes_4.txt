@@ -66,8 +66,8 @@ In Phase #2 of the project, you need to do the following.
 
 (5) RunCollatz.out: you may need to mannually update this file after you finish each phase of the project  
    This file represents acceptance tests and must have correspondence with RunCollatz.in.
-   Can be created using the online Collatz calculator: 
-   https://www.uvatoolkit.com/problemssolve.php
+   Can be created using the online Collatz calculator (Unfortunately, the site is down. We'll post an alternative on Piazza): 
+   https://www.uvatoolkit.com/problemssolve.php 
 
 (6) TestCollatz.out: you need to manually update this file after you finish each phase of the project
 $ mv TestCollatz.tmp TestCollatz.out
