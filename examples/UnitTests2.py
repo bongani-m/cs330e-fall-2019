@@ -35,7 +35,7 @@ if __name__ == "__main__" :
     main()
 
 """ #pragma: no cover
-% UnitTests2.py
+% python UnitTests2.py
 .F.
 ===========================================================
 FAIL: test_2 (__main__.MyUnitTests)
