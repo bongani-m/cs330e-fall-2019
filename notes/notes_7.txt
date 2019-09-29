@@ -55,4 +55,75 @@ reduce:
   1*1*2*3
   e.g., reduce(add, range(1,5), 1) = 1 + 1 + 2 + 3 + 4 
 
-  write the function reduce: reduce(bf, iterable, seed) 	
+  write the function reduce: reduce(bf, iterable, seed) 
+-------------
+
+variables.py
+------------
+(1) Shallow copying: A shallow copy also makes a separate new object object or list, but instead of copying the 
+child elements to the new object, it simply copies the references to their memory addresses. 
+b=a[:] 
+b=copy[a] 
+
+Examples:
+------------------
+>>> from copy import copy
+>>> a = [[90, 85, 82], [72, 88, 90]]
+>>> b = a[:]
+>>> b [0][0] = 30
+>>> a
+[[30, 85, 82], [72, 88, 90]]
+>>> b
+[[30, 85, 82], [72, 88, 90]]
+>>> a is not b
+True
+
+--------------------
+b=copy[a] 
+-------------------
+>>> a = [[90, 85, 82], [72, 88, 90]]
+>>> b = copy(a)
+>>> b[0][0] = 30
+>>> a
+[[30, 85, 82], [72, 88, 90]]
+>>> b
+[[30, 85, 82], [72, 88, 90]]
+>>> a is not b
+True
+----------------
+Deep copying: A deep copy makes a new and separate copy of an entire object 
+or list with its own unique memory address. 
+
+Example:
+---------
+>>> from copy import deepcopy
+>>> a = [[90, 85, 82], [72, 88, 90]]
+>>> b = deepcopy(a)
+>>> b[0][0] = 30
+>>> a
+[[90, 85, 82], [72, 88, 90]]
+>>> b
+[[30, 85, 82], [72, 88, 90]]
+>>> a is not b
+True
+>>>
+
+---------------------
+Caches.py
+---------
+Python caches certain ranges of commonly-used immutable types.
+
+Python in the interactive interpreter caches [-5, 256] but in a file the behavior is different since 
+the file is preprocessed.
+
+Example on the inconsistent behavior of interactive vs script python.
+>>> a = 257
+>>> b = 257
+>>> a is b 
+False # ?
+>>> a = 257; b = 257; a is b
+True # ?
+
+Why?
+What you see is the Python interpreter optimizing identical literals when part of the same text.
+(i.e., In a file, the interpreter can preprocess all of the code, before actually running it.)
