@@ -1,0 +1,62 @@
+Factorial.py and FactorialT.py:
+Q) Why do we put the initialization code inside "setup" method not inside the constructor "__init__"?
+because the constructor is going to be executed once upon object creation.
+But setup will be executed every time we invoke the object. 
+Factorial.py 
+def f (n):
+    sum = n
+    n -= 1
+    while n > 0:
+        sum *= n
+        n -= 1
+    return sum
+
+Lines 14-18, a linear recursive implementation. 
+•	Perform recursive calls first, then take the return value of the recursive call and calculate the result.  The result won't be calculated until you have returned from every recursive call.
+•	You need to keep stack frames until the recursion is over -- O(n) space. 
+
+Lines 22-30, a tail recursive implementation. 
+•	Note that a function inside a function is allowed in Python. 
+•	Perform your calculations first and then execute the recursive call, passing the results of the current step to the next recursive step. 
+•	We are reusing the current stack frame so we will never get stack overflow.
+•	Some compliers transfer tail recursive functions into loop. 
+•	Procedure is recursive but the process is not.
+
+Lines 42-47, an implementation using range.
+ 
+Lines 49-51, an implementation using reduce.
+•	reduce is a higher order function. take in a function and returns a function.
+•	mul is a function from a module called operator. You can think of it as a wrapper for the operator *.
+•	reduce(binary_function, sequence_of_elements[, Seed: base_case_if_seq_is_empty)]
+•	Note that the initialization is optional. If it's present, it will be placed before the items of the iterable in the calculations. if it's not, and the iterable contain one item, it will return this one item.
+•	reduce(add,[],0] #0
+•	reduce(add,[])
+•	error: no initial value
+
+e.g., reduce(mul, range(1, 4), 1)
+1*1*2*3
+FactorialT.py
+Lines 11-16, importing different implementations of factorial.
+note: in Python code, if you end the line with a backslash, Python will continue
+the line of code into the next. So:
+print 23 + \
+x
+is the same as: 
+print 23 + x
+
+
+Lines 19-26, 
+•	Line 19, invoking self on setup method. (there is another method called tearDown() which is the opposite of setup).
+•	Lines 20-26. defining a list of pointers to the different implementations of factorial. 
+Lines 28-31, 
+•	Line 28, invoking self on test_0 method.
+•	Line 29-31, going through the list of implementations of factorial hoping to get 1 as a result of applying one of the implementations to 0.
+•	with self.subTest(): if one of the test fails, this would be the end of test_0. with keeps the test going until it goes through all. 
+Lines 33-56, additional test methods.
+
+Lines 58-67,
+•	Line 63, uses timeit function which takes three arguments.
+•	Line 64, f.__name__ obtains the name of the current function and "(100)" is the argument to the function.
+•	Line65, "from __main__ import " + f.__name__ imports the definition of the function
+•	Line 66, number = 1000, determine how many times we are going to run the function.
+•	Line 67 prints out result formatted in 2 decimal float point. The result, t, is printed after multiply it with 1000 because timeit provides results in microseconds and we need it in milliseconds.

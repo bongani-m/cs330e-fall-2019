@@ -1,39 +1,31 @@
-iteration.py 
-Iterables:
-- an iterable is an object that you can iterate through.
-- iterables usually have the property "__getitem__" 
-  that indicates an object is indexable.
+Factorial.py and FactorialT.py
+------------------------------
+Factorial.py:
+------------
+factorial_recursion
+•	Perform recursive calls first, then take the return value of the recursive call and 
+calculate the result.  The result won't be calculated until you have returned from every recursive call.
+•	You need to keep stack frames until the recursion is over -- O(n) space. 
 
->>> x=[2, 3, 4]
->>> hasattr(x, "__iter__")
-True
->>> hasattr(x, "__getitem__")
-True
->>> hasattr(x, "__next__")
-False
+factorial_tail_recursion
+•	Note that a function inside a function is allowed in Python. 
+•	Perform your calculations first and then execute the recursive call, passing the results of 
+the current step to the next recursive step. 
+•	We are reusing the current stack frame so we will never get stack overflow.
+•	Some compliers transfer tail recursive functions into loop. 
+•	Procedure is recursive but the process is not.
 
-Iterators vs generators:
-- an iterator object is an object that has the "__iter__" attribute.
-- you can get an iterator out of an iterable using iter function.
-- a Generator is a function that produces 
-  a sequence of results instead of a single value.
-- every generator is an iterator.
-
-iter(): takes an iterable object and returns an iterator.
->>> x=[2, 3, 4]
->>> p = iter(x)
->>> next(p)
-2
->>> next(p)
-3
->>> next(p)
-4
->>> next(p)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-StopIteration
->>>
------
+FactorialT.py:
+------------
+with self.subTest(): if one of the test fails, this would be the end of test_0. with keeps the test 
+going until it goes through all. 
+timeit:
+•	timeit function takes three arguments.
+•	f.__name__ obtains the name of the current function and "(100)" is the argument to the function.
+•	"from __main__ import " + f.__name__ imports the definition of the function
+•	number = 1000, determine how many times we are going to run the function.
+•	The result, t, is printed after multiply it with 1000 because timeit provides results in microseconds 
+and we need it in milliseconds.
 
 reduce:
 ------
@@ -62,10 +54,10 @@ variables.py
 ------------
 (1) Shallow copying: A shallow copy also makes a separate new object object or list, but instead of copying the 
 child elements to the new object, it simply copies the references to their memory addresses. 
-b=a[:] 
-b=copy[a] 
+a. b=a[:] 
+b. b=copy[a] 
 
-Examples:
+a. Example: b=a[:] 
 ------------------
 >>> from copy import copy
 >>> a = [[90, 85, 82], [72, 88, 90]]
@@ -78,8 +70,7 @@ Examples:
 >>> a is not b
 True
 
---------------------
-b=copy[a] 
+b. Example: b=copy[a] 
 -------------------
 >>> a = [[90, 85, 82], [72, 88, 90]]
 >>> b = copy(a)
@@ -91,7 +82,8 @@ b=copy[a]
 >>> a is not b
 True
 ----------------
-Deep copying: A deep copy makes a new and separate copy of an entire object 
+
+(2) Deep copying: A deep copy makes a new and separate copy of an entire object 
 or list with its own unique memory address. 
 
 Example:
@@ -127,3 +119,5 @@ True # ?
 Why?
 What you see is the Python interpreter optimizing identical literals when part of the same text.
 (i.e., In a file, the interpreter can preprocess all of the code, before actually running it.)
+
+

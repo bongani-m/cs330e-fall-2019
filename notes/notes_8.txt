@@ -1,3 +1,41 @@
+iteration.py 
+Iterables:
+- an iterable is an object that you can iterate through.
+- iterables usually have the property "__getitem__" 
+  that indicates an object is indexable.
+
+>>> x=[2, 3, 4]
+>>> hasattr(x, "__iter__")
+True
+>>> hasattr(x, "__getitem__")
+True
+>>> hasattr(x, "__next__")
+False
+
+Iterators vs generators:
+- an iterator object is an object that has the "__iter__" attribute.
+- you can get an iterator out of an iterable using iter function.
+- a Generator is a function that produces 
+  a sequence of results instead of a single value.
+- every generator is an iterator.
+
+iter(): takes an iterable object and returns an iterator.
+>>> x=[2, 3, 4]
+>>> p = iter(x)
+>>> next(p)
+2
+>>> next(p)
+3
+>>> next(p)
+4
+>>> next(p)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+>>>
+-----
+
+
 Generators:
 yield:
 ------

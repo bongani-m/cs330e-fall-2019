@@ -1,0 +1,75 @@
+Example:
+>>> a = 250
+>>> id(a)
+1887346576
+>>> a += 1
+>>> id(a)
+1887346608
+>>> a = a + 1
+>>> id(a)
+1887346640
+>>> b = 250
+>>> id(b)
+1887346576
+>>> b += 0
+>>> id(b)
+1887346576
+>>> b = b + 0
+>>> id(b)
+1887346576
+>>>
+>>> x = "abc"
+>>> id(x)
+1166140652880
+>>> x += ""
+>>> id(x)
+1166140652880
+>>>
+
+Lines 11-13, define a variable x and stores 2 in it then defines a variable y and stores 2 + 0 in it. 
+Then, ensures that x and y are the same object.
+Lines 15-17, define two variables x and y and store 257 in both of them. 
+Then, ensure that x and y are the same object. 
+
+Note: Python caches integers in the range [-5, 256], so it is expected that integers in that range 
+are also identical. i.e., within this range, the variable is its value. outside this range 
+the variable is an address.
+
+Lines 19-27, define a variables x and stores 257 in it and a variables y stores 257 + 0 in it. 
+Even though x and y have the same value, they are not the same objects due to computation 
+i.e., + 0. After subtracting 1 from x and y, they fall in the range and they become the same objects.
+
+Lines 29-37, define a variables x and stores -6 in it and a variables y stores -6 + 0 in it. 
+Even though x and y have the same value, they are not the same objects due to computation i.e., + 0. 
+After adding 1 to x and y, they fall in the range and they become the same objects.
+
+Lines 39-41, define two variables x and y and store 2.34 in both of them. 
+Then, ensure that x and y are the same object, but have the same value.
+
+Lines 43-46, define two variables x and y and store 2.34 and 2.43 + 0 in both of them, 
+respectively. Then, ensure that x and y are not the same object.
+
+Lines 48 - 50, define two variables x and y and store "abc" in both of them. 
+Then, ensure that x and y are the same object.
+
+Lines 52-54, define two variables x and y and store "abc" and "ab" + "c" in both of them, respectively. 
+Then, ensure that x and y are the same object.
+
+Lines 56-61, define 4 variables s, u, and v,  and store "abc",  "ab", "c" in them respectively. 
+Then define t = u + v. Then, ensure that s and t are not the same object. 
+Since python caches strings only if they are compiled time constants.
+
+Lines 63-66, define two variables a and b and store and empty list (mutable) in both of them. 
+Then, ensure that a and b are not the same object. 
+
+Lines 68-70, define two variables a and b and store and empty tuple (immutable) in both of them. 
+Then, ensure that a and b are the same object. 
+
+Lines 72-75, define two variables a and b and store and empty set (mutable) in both of them.
+Then, ensure that a and b are not the same object. 
+
+Lines 77-79, define two variables a and b and store and empty frozenset (immutable) in both of them. 
+Then, ensure that a and b are the same object. 
+
+Lines 81-84, define two variables a and b and store and empty dict (mutable) in both of them. 
+Then, ensure that a and b are not the same object. 
