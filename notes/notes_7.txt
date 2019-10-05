@@ -52,6 +52,61 @@ reduce:
 
 variables.py
 ------------
+Lists and tuples
+----------------
+a += b 
+If "a" is a list, then "b" can be either a list or a tuple.
+If "a" is a tuple, then "b" must only be a tuple.
+  
+
+a = a + b
+If "a" is a list, then "b" must only be a list.
+If "a" is a tuple, then "b" must only be a tuple.
+
++ is in-tolerant, += is tolerant (happy with any iterable)
+
+a += b is the same as a = a + b only if a and b are immutable.
+Example, i = 2, j =3, i += j is same as i = i + j applies to integers since they are immutable.
+-----
+a is a list
+b is another list
+b = a
+
+b += [5] vs b = b + [5]
+
+adding an element to the list b using += will affect both a and b. 
+adding an element to the list b using + will only affect b but NOT a. 
+
+a = [2, 3, 4]
+b = a
+assert a is b
+b += [5]
+assert a == [2, 3, 4, 5]
+assert a is b
+
+a = [2, 3, 4]
+b = a
+assert a is b
+b = b + [5]
+assert a == [2, 3, 4]
+assert b == [2, 3, 4, 5]
+
+adding an element to the tuple b using += or + only affect b but NOT a.
+a = (2, 3, 4)
+b = a
+assert a is b
+b += (5,)
+assert a == (2, 3, 4)
+assert b == (2, 3, 4, 5)
+
+a = (2, 3, 4)
+b = a
+assert a is b
+b = b + (5,)
+assert a == (2, 3, 4)
+assert b == (2, 3, 4, 5)
+-------------------------
+
 (1) Shallow copying: A shallow copy also makes a separate new object object or list, but instead of copying the 
 child elements to the new object, it simply copies the references to their memory addresses. 
 a. b=a[:] 

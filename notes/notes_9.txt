@@ -1,57 +1,127 @@
-Comprehensions.py
------------------
-filter(predicate, list_of_inputs)
-filter is a generator takes a predicate, it applies the predicate 
-on the given iterable returns the element that satisfies the predicate.
-It's an iterator, i.e., it returns itself.
-Exercise: Write up a filter function
+Generators:
+yield:
+------
+Yield:
+e.g., 1
+>>>def f() :
+>>>    print("abc")
+>>>    return 5
+>>>    print ("def") # it does not make sense to have code 
+                     # after return unless there is a condition before return.
 
-# function that has yield in it
-def filter(up, a) : # up is a unary predicate, a is an iterable
-    for v in a :
-        if up(v) :
-	        yield v
-# comprehension in parenthesis
-def filter(up, a) :
-	return (v for v in a if up(v))
+>>>v = f()
+abc
+>>>print(v)
+5
+-------------------------------
+e.g., 2
+>>>def f() :
+>>>    print("abc")
+>>>    yield 5
+>>>    print("def")
+>>>    yield 6
 
-"|=" union of sets
-
-Lines 174: all() # takes an iterable, return true if all its members are evaluated to true
-A(): instance of a class
+>>>v = f()
+>>>print(v)
+<generator object f at 0x0096E8A0>
+>>>print(hasattr(v, "__next__"))
 True
-...
-all([]) = True
-Lines 186: any() # takes an iterable, return true if at least one of its members is evaluated to true.
-any([]) = False
-
-FunctionKeywords.py
-Note 1: the specified "by name" arguments should have corresponds with the names 
-in the function signature as parameters.
-Note 2: In the functional call, when you mix "by position" and "by name" arguments, 
-arguments passed "by position" should come first. 
-Then the remainder by name (the order of the arguments passed by name does not matter)
-
-FunctionDefaults.py
-In function definition, non-default arguments cannot follow default arguments.
-
-FunctionUnpacking.py
-ordering of unpacking (When calling a function and passing a parameter – 
-by position, by variable name, or by unpacking):
-- position must precede variables. 
-- variables and unpacking (order does not matter): unpacking first, assign values of unpacking to parameters in order. Then, assign variables. Note that there might be name conflict for example
->>> def f (x, y, z) :
-...     return [x, y, z]
-...
->>> t = (3, 4)
->>>
->>> assert f(z = 2, *t) == [3, 4, 2]
->>> assert f(*t, z = 2) == [3, 4, 2]
->>> assert f(*t, x = 2) == [3, 4, 2]
+>>>w = next(v)
+abc
+>>>print(w)
+5
+>>>w = next(v) # function starts running from where it left off
+>>>print(w)
+6
+>>> w = next(v) # raises an exception
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-TypeError: f() got multiple values for argument 'x'
+StopIteration
+>>>print(w)
+6
+------------------------------------------
 
->>> assert f(2, *t) == [2, 3, 4]
->>> assert f(*t, 2) == [3, 4, 2]
+>>>def f () :
+>>>	print(“abc”)
+>>>	yield 5
+>>>	print(“def”)
+>>>	yield 6
+>>>	print(“ghi”)
+
+>>>v = f()     # <nothing>
+>>>print(v)    
+<generator object f at .....>
+>>>w = next(v) 
+abc
+>>>print(w)    
+5
+>>>x = next(v) 
+def
+>>>print(x)   
+6
+>>>y = next(v) 
+ghi 
+raise StopIteration
+---------
+
+Example of a Generator
+# f.py
+def yrange(n):
+	i = 0
+	while i < n :
+		yield i
+		i += 1
+		
+>>> from f import yrange
+>>> yrange(3)
+<generator object yrange at 0x01ABEA80>
+>>> list(yrange(3))
+[0, 1, 2]
 >>>
+----
+Lambda and zip
+--------------
+Lambda is an anonymous function that can be created at runtime. 
+Anonymous means that it should not be bound to a name.
+
+>>> def f (x):
+...     return x**2
+>>> g = lambda x: x**2
+>>>
+>>> f(3) == g(3)
+True
+Note that the lambda definition does not include a "return" statement -- 
+it always contains an expression which is returned.
+
+Syntax:
+lambda arg1, arg2, ...argN : expression using arguments
+>>> f = lambda x, y, z: x + y + z
+>>> f(1, 2, 3)
+6
+>>>
+
+Zip:
+zip is a generator that combines two objects in a tuple.
+
+>>> a = [1, 2, 3, 4]
+>>> b = ['a', 'b', 'c', 'd']
+>>> c = zip(a, b)
+>>> c
+<zip object at 0x01939440>
+>>> list(c)
+[(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]
+>>> list(c)
+[]
+-------
+
+map function:
+------------
+map(function_to_apply, list_of_inputs)
+
+Example
+>>> items = [1, 2, 3, 4, 5]
+>>> squared = list(map(lambda x: x**2, items))
+>>> squared
+[1, 4, 9, 16, 25]
+>>>
+
