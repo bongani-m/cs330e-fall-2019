@@ -1,18 +1,7 @@
 Reduce.py:
 ---------
 reduce_for_range (bf, a, v) demands a to be indexable.
-reduce_for (bf, a, v) does NOT a to indexable. It should only be iterable.
-
-Notes:
-•	reduce() and rmse() should need at most for their sequences to be iterable, not indexable
-•	reverse() needs its sequence to be reverse iterable
-•	quicksort() needs its sequence to be indexable - Go to the middle of the list in constant time.
-•	a singly-linked list is iterable
-•	a doubly-linked list is reverse iterable
-•	an array is indexable
-
-•	algorithms should demand the weakest iteration
-•	data structures should provide the strongest iteration
+reduce_for (bf, a, v) does NOT demand a to indexable. It should only be iterable.
 
 iteration.py: 
 ------------
@@ -30,7 +19,7 @@ True
 False
 
 Iterators vs generators:
-- an iterator object is an object that has the "__iter__" attribute.
+- an iterator object is an object that has the "__iter__" and "__next__" attribute.
 - you can get an iterator out of an iterable using iter function.
 - a Generator is a function that produces 
   a sequence of results instead of a single value.

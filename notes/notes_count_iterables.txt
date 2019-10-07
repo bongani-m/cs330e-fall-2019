@@ -1,0 +1,44 @@
+As per the definition of an iterable from Python glossary: An object capable of returning its 
+members one at a time. Examples of iterables include all sequence types (such as list, str, and tuple) 
+and some non-sequence types like dict, file objects, and objects of any classes you define with an __iter__() 
+method or with a __getitem__() method that implements Sequence semantics.
+
+ 
+
+So no, not all iterables have __getitem__ method but all iterable objects need to implement 
+either __iter__() or __getitem__(). The reason why not all iterables implement __getitem__ is 
+that you could have a data structure that is iterable but not indexable. __getitem__ method essentially 
+takes a key(this could be an integer representing index) and returns the element at that key.
+ For a data structure like set there is no key to be given. You can't index a set but you can 
+still iterate over it. 
+
+ 
+
+As for count, it is just a class method that returns an integer. It can't be an iterator 
+since its not even a object if that makes sense. For an object to be an iterator it needs 
+to have a __next__ method. 
+
+ 
+
+Here is the python glossary with definitions: https://docs.python.org/3/glossary.html
+
+Example:
+---------
+from itertools import count 
+
+x = count(0)  
+s = 0
+for v in x :
+    print(v)
+    if v == 10 :
+        break
+    s += v
+# 0, 1, ..., 10
+print("After exiting loop x = {}".format(x))
+
+for v in x :
+    print(v)
+    if v == 20 :
+        break
+    s += v
+# 11, 12, ..., 20

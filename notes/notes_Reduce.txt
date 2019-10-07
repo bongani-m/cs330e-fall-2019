@@ -1,0 +1,11 @@
+Reduce.py
+Notes:
+•	reduce() should need at most for their sequences to be iterable, not indexable
+•	reverse() needs its sequence to be reverse iterable
+•	quicksort() needs its sequence to be indexable - Go to the middle of the list in constant time.
+•	a singly-linked list is iterable
+•	a doubly-linked list is reverse iterable
+•	an array is indexable
+
+•	algorithms should demand the weakest iteration
+•	data structures should provide the strongest iteration

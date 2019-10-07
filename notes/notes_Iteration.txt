@@ -1,0 +1,5 @@
+•	In Python, sets are implemented as a hash table. Items, therefore, has to be hashable. 
+•	Sets can only contain hashable elements
+•	the immutables (tuple, string, frozenset) are hashable
+•	the mutables (list, set, dict) are not hashable.
+•	Complexity of looking up an element in a set is constant due to hash (index of an array)
