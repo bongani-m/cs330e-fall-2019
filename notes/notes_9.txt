@@ -42,11 +42,11 @@ StopIteration
 ------------------------------------------
 
 >>>def f () :
->>>	print(“abc”)
+>>>	print("abc")
 >>>	yield 5
->>>	print(“def”)
+>>>	print("def")
 >>>	yield 6
->>>	print(“ghi”)
+>>>	print("ghi")
 
 >>>v = f()     # <nothing>
 >>>print(v)    
