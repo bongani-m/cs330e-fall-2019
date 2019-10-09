@@ -115,6 +115,9 @@ zip is a generator that combines two objects in a tuple.
 
 ------------------------------------------------------
 RMSE: what and why?
+The root-mean-square error (RMSE) is a frequently used measure of the differences between values 
+(sample or population values) predicted by a model or an estimator and the values observed. 
+
 What if one list is larger than the other? We just choose the smaller one (as python's zip does) .
 
 RMSE example:
