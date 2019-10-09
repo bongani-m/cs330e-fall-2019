@@ -31,6 +31,7 @@ abc
 >>>print(w)
 5
 >>>w = next(v) # function starts running from where it left off
+def
 >>>print(w)
 6
 >>> w = next(v) # raises an exception
@@ -229,27 +230,6 @@ sqrt(mean(square(subtract(a, p))))
 a,p are two iterables
 subtract(a,p) returns an iterable. eager: list, lazy:generator
 square(x): x should be an iterable
-           returns an iterable. eager: list, lazy:generator 
+           returns an iterable. 
 mean(x): x is iterable
 	 should be eager
-
-Result of RMSET.py
-zip, faster, lazy
-Lambda, not fast
-sum(map(lambda)), slower
-zip, better
-generator-sum, a little bit slower
------------------------------------------------
-
-
-map function:
-------------
-map(function_to_apply, list_of_inputs)
-
-Example
->>> items = [1, 2, 3, 4, 5]
->>> squared = list(map(lambda x: x**2, items))
->>> squared
-[1, 4, 9, 16, 25]
->>>
-

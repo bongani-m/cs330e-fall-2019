@@ -1,3 +1,15 @@
+map function:
+------------
+map(function_to_apply, list_of_inputs)
+
+Example
+>>> items = [1, 2, 3, 4, 5]
+>>> squared = list(map(lambda x: x**2, items))
+>>> squared
+[1, 4, 9, 16, 25]
+>>>
+
+
 Comprehensions.py
 -----------------
 filter(predicate, list_of_inputs)
