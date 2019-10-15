@@ -86,15 +86,16 @@ but rather return a new object when attempting to update
 # Note that list "a" is an element inside the tuple "t"
 >>> a = [2, 3, 4]
 >>> t = (5, a, 6.7) # list "a" is a member of the tuple t
->>> a[0] = 3
->>> a
-[3, 3, 4]
+>>> a[0]=3
+>>> t
+(5, [3, 3, 4], 6.7)
 >>> t[0]=3
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: 'tuple' object does not support item assignment
+>>> a += [2]
 >>> t
-(5, [2, 3, 4, 3], 6.7, 3)
+(5, [3, 3, 4, 2], 6.7)
 # "a" can be changed in the sense it's a fixed address pointing to a list 
 (the contents where the pointer points to can be changed though)
 ----
