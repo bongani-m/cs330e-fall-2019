@@ -1,11 +1,39 @@
 FunctionDefaults.py
 In function definition, non-default arguments cannot follow default arguments.
 
+Lines 35-39, test different function calls to h1. 
+•	Line 35: call with nothing. no pass, x=[], add to it [2], result is [2].
+•	Line 36, the default only happens once when the function is called first.
+•	Line 37, passes in a list -- will add 2 to the list components.
+•	Line 38, call with nothing, get another 2 added to the previously build list.
+•	Line 39, passes in a list -- will add 2 to the list components.
+Lines 43-45: Define the function h2 which set default to empty parameter (empty tuple). 
+-- change default to immutable.
+Lines 47-51, test different function calls to h2.
+•	Line 47: call with nothing. no pass, x=(), create a new tuple, result is (2,).
+•	Line 48, another call with nothing. no pass, x=(), create a new tuple, result is (2,).
+•	.....
+•	Recommendation: do not use mutables as defaults.
+Mutable Function Default
+if it is a must, default it to None and init an empty one later (if arg is None)
+
+Lines 55-59: Define the function h3 which set default to None parameter (None = null in Java).
+Lines 61-66, test different function calls to h3.
+
+....
+Note that in this example, we call the function h3() twice we get the same result, [2], 
+not like h1(): we first received [2] and then received [2, 2]. Because the list in h1 was 
+a default and it was constructed only once. But in h3 the list was not the default. 
+It was inside the function as a local variable.
+
+
 FunctionUnpacking.py
 ordering of unpacking (When calling a function and passing a parameter – 
 by position, by variable name, or by unpacking):
-- position must precede variables. 
-- variables and unpacking (order does not matter): unpacking first, assign values of unpacking to parameters in order. Then, assign variables. Note that there might be name conflict for example
+- position must precede variable name. 
+- variable name and unpacking (order does not matter): unpacking first, 
+assign values of unpacking to parameters in order. Then, assign variables. 
+Note that there might be name conflict for example
 >>> def f (x, y, z) :
 ...     return [x, y, z]
 ...
@@ -34,7 +62,7 @@ FunctionDict.py
 
 Rules above applies in addition to the following: * (unpacking iterable) must precede ** (unpacking dictionary).
 Syntax: 
-position should come before name
+position should come before variable name
 position should come before unpacking dict
 unpacking iterable should come before unpacking dict
 

@@ -1,0 +1,58 @@
+Tail Recursion: 
+In traditional recursion, the typical model is that you perform your recursive calls first, and then you take 
+the return value of the recursive call and calculate the result. In this manner, you don't get the result of 
+your calculation until you have returned from every recursive call.
+
+In tail recursion, you perform your calculations first, and then you execute the recursive call, passing 
+the results of your current step to the next recursive step. This results in the last statement being in 
+the form of "(return (recursive-function params))" (I think that's the syntax for Lisp). Basically, the 
+return value of any given recursive step is the same as the return value of the next recursive call.
+
+The consequence of this is that once you are ready to perform your next recursive step, you don't need 
+the current stack frame any more. This allows for some optimization. In fact, with an appropriately written 
+compiler, you should never have a stack overflow snicker with a tail recursive call. Simply reuse the current 
+stack frame for the next recursive step. I'm pretty sure Lisp does this.
+
+Example:
+-------
+Tail recursion is well-described in previous answers, but I think an example in action would help to illustrate the concept.
+
+Consider a simple function that adds the first N integers. (e.g. sum(5) = 1 + 2 + 3 + 4 + 5 = 15).
+
+Here is a simple Python implementation that uses recursion:
+
+def recsum(x):
+ if x == 1:
+  return x
+ else:
+  return x + recsum(x - 1)
+If you called recsum(5), this is what the Python interpreter would evaluate.
+
+recsum(5)
+5 + recsum(4)
+5 + (4 + recsum(3))
+5 + (4 + (3 + recsum(2)))
+5 + (4 + (3 + (2 + recsum(1))))
+5 + (4 + (3 + (2 + 1)))
+15
+Note how every recursive call has to complete before the Python interpreter begins to actually do the work of calculating the sum.
+
+Here's a tail-recursive version of the same function:
+
+def tailrecsum(x, running_total=0):
+  if x == 0:
+    return running_total
+  else:
+    return tailrecsum(x - 1, running_total + x)
+Here's the sequence of events that would occur if you called tailrecsum(5), (which would effectively be tailrecsum(5, 0), because of the default second argument).
+
+tailrecsum(5, 0)
+tailrecsum(4, 5)
+tailrecsum(3, 9)
+tailrecsum(2, 12)
+tailrecsum(1, 14)
+tailrecsum(0, 15)
+15
+In the tail-recursive case, with each evaluation of the recursive call, the running_total is updated.
+
+Note: As mentioned in the comments, Python doesn't have built-in support for optimizing away tail calls, so there's no advantage to doing this in Python. However, you can use a decorator to achieve the optimization

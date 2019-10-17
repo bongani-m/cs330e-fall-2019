@@ -1,0 +1,21 @@
+class vs function
+I am studying for test#1, and I am a little bit confused when to use class and when to use function?
+
+ 
+
+Can someone please make it clear? Thank you
+
+Answer:
+I will try to explain this using the two examples we have done in class (range and rangeIterator).
+
+ 
+
+In RangeIteratorT we see that range_iterator_class and range_iterator_function are imported meaning we can implement the rangeIterator functionality in both a class and a function.
+
+ 
+
+In RangeT we see that range_1, and range_2 are imported. More importantly on lines 50-51 list() is called twice and we get a new iterator both times! This logic can't be done in a function, meaning we need to make a class that responds to __iter__().
+
+ 
+
+Hope that helps.
