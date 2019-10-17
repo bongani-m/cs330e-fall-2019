@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-#pylint: disable = too-few-public-methods
-
 # --------
 # Range.py
 # --------
