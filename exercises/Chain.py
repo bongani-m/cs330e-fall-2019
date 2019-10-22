@@ -12,15 +12,15 @@
 # Used for treating consecutive sequences as a single sequence
 
 def chain_for(*a) :
-    if not a :
-       pass
-    else:
+    if a :
        for i in a :
           for j in i :
              yield j
-             
+    else :
+       pass    
+       
 def chain_generator(*a) :
-   if not a :
+   if a :
+      return (j for i in a for j in i)
+   else :
       pass
-   else:
-     return (j for i in a for j in i)

@@ -18,9 +18,6 @@ class MyUnitTests (TestCase) :
             chain_for,
             chain_generator,
             chain]
-        self.b = ['A', 'B', 'C'] 
-        self.c = ['D', 'E', 'F']
-        self.d = ['G', 'H', 'I']
         
     def test_1 (self) :
        for f in self.a :
@@ -31,26 +28,26 @@ class MyUnitTests (TestCase) :
     def test_2 (self) :
        for f in self.a :
             with self.subTest() :
-                x = f(self.a, [])
-                self.assertEqual(list(x), self.a)
+                x = f(['A', 'B', 'C'], [])
+                self.assertEqual(list(x), ['A', 'B', 'C'])
 
     def test_3 (self) :
        for f in self.a :
             with self.subTest() :
-                x = f([], self.b)
-                self.assertEqual(list(x), self.b)
+                x = f([], ['D', 'E', 'F'])
+                self.assertEqual(list(x), ['D', 'E', 'F'])
                 
     def test_4 (self) :
        for f in self.a :
             with self.subTest() :
-                x = f(self.b, self.c)
+                x = f(['A', 'B', 'C'], ['D', 'E', 'F'])
                 self.assertEqual(list(x), ['A', 'B', 'C', 'D', 'E', 'F'])  
                 
     def test_5 (self) :
        for f in self.a :
             with self.subTest() :
-                x = f(self.b, self.c, self.d)
+                x = f(['A', 'B', 'C'], ['D', 'E', 'F'], ['G', 'H', 'I'])
                 self.assertEqual(list(x), ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'])  
-                
+    
 if __name__ == "__main__" :
     main()
