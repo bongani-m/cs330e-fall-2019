@@ -20,13 +20,15 @@ It's an iterator, i.e., it returns itself.
 
 "|=" union of sets
 
-Lines 174: all() # takes an iterable, return true if all its members are evaluated to true
+Lines 174: all() # all(iterable): Return True if all elements of the iterable are true (or if the iterable is empty).
 A(): instance of a class
 True
 ...
 all([]) = True
-Lines 186: any() # takes an iterable, return true if at least one of its members is evaluated to true.
+
+Lines 186: any() # any(iterable): Return True if any element of the iterable is true. If the iterable is empty, return False.
 any([]) = False
+https://docs.python.org/3.5/library/functions.html#all
 
 FunctionKeywords.py
 Note 1: the specified "by name" arguments should have corresponds with the names 
