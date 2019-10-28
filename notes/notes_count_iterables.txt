@@ -1,3 +1,10 @@
+Iterator objects in python conform to the iterator protocol, which basically means they provide 
+two methods: __iter__() and __next__(). The __iter__ returns the iterator object and 
+is implicitly called at the start of loops. The __next__() method returns the next value 
+and is implicitly called at each loop increment. __next__() raises a StopIteration exception 
+when there are no more value to return, which is implicitly captured by looping constructs to stop iterating.
+https://stackoverflow.com/questions/19151/build-a-basic-python-iterator
+
 As per the definition of an iterable from Python glossary: An object capable of returning its 
 members one at a time. Examples of iterables include all sequence types (such as list, str, and tuple) 
 and some non-sequence types like dict, file objects, and objects of any classes you define with an __iter__() 
@@ -42,3 +49,5 @@ for v in x :
         break
     s += v
 # 11, 12, ..., 20
+
+Iterators: https://www.programiz.com/python-programming/iterator

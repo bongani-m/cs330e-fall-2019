@@ -1,0 +1,29 @@
+The decorator allows behaviour to be added to an existing function dynamically. 
+
+Decorator is a syntax sugar (special grammar) for calling high order functions in Python, 
+it allows you to modify the behavior of a function easily.
+
+Closure is concept where variables from outer scope will be bind with the inner function 
+when it is passed elsewhere. You can see it as a mechanism of how decorator works.
+
+ 
+
+These two are different things. In short, a decorator is a grammar syntax, 
+closure is key to understand how it works.
+
+-----
+def post_gtz (f) :
+    def g (n) :
+        v = f(n)
+        assert v > 0
+        return v
+    return g
+
+
+The entire function is to transform a function "f" to a function that checks if output greater than zero. 
+That function to be returned is "g". You can think of "g" as a wrapper of "f", it calls "f" in its body 
+then check if the result if greater than 0.
+
+ 
+
+TLDR: perform the work of "f" and get the result to check if its > 0.
