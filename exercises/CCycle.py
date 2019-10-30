@@ -18,7 +18,7 @@ class cycle_class() :
       
    def __next__(self) :
       if self.size == 0 :
-         return [] 
+         raise StopIteration() 
       else :          
          j = self.i
          self.i += 1
