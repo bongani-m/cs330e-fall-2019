@@ -1,24 +1,29 @@
-Python iterables must implement one special methods, __iter__(). the "__iter__" magic function is called, 
-for example, when a for-loop starts. 
+Python iterables must implement one special methods, __iter__(). 
+the "__iter__" magic function is called, for example, 
+when a for-loop starts. 
 
-Python iterator object must implement two special methods, __iter__() and __next__().
+Python iterator object must implement two special methods, 
+__iter__() and __next__().
 
 An object is called iterable if we can get an iterator from it. 
-Most of built-in containers in Python like: list, tuple, string etc. are iterables.
+Most of built-in containers in Python like: list, tuple, string 
+etc. are iterables.
 
-The iter() function (which in turn calls the __iter__() method) returns an iterator from them.
+The iter() function (which in turn calls the __iter__() method) 
+returns an iterator from them.
 -------------
 
 Range and RangeIterator: 
 ------------------------
-In RangeIteratorT we see that range_iterator_class and range_iterator_function 
-are imported meaning we can implement the rangeIterator functionality 
-in both a class and a function.
+In RangeIteratorT we see that range_iterator_class and 
+range_iterator_function are imported meaning we 
+can implement the rangeIterator functionality in 
+both a class and a function.
  
-In RangeT we see that range_1, and range_2 are imported. More importantly 
-on lines 50-51 list() is called twice and we get a new iterator both times! 
-This logic can't be done in a function, meaning we need to make
- a class that responds to __iter__().
+In RangeT we see that range_1, and range_2 are imported. 
+More importantly on lines 50-51 list() is called twice 
+and we get a new iterator both times! This logic can't be 
+done in a function, meaning we need to make a class that responds to __iter__().
 
  
 Range_2:
