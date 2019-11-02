@@ -1,140 +1,166 @@
-•	 build CrossJoin
-CrossJoin (r, s): 
-CrossJoin combines 
-the first row of r with all rows of s, 
-the second row of r with all rows of s, 
-....
-Cross-Join(r,s)
-Note: dict constructor receives two dictionaries and returns one dictionary that results from combining first with the unpacking of the second.
-e.g., 
-d1 = {}
-d2 = {}
-d3 = dict(d1, **d2)
-Note:
-(1) d = {1: 'one', 2: 'two'} is possible, but, obviously, dict(1='one' ...) is not.
-(2) when applying dict on d1 and d2 where both have two identical key values, the value of d2 is taken.
-(3) When using dict constructor with dictionaries that has integer keys, we receive an error.
-# error
->>> d1 = {1 : "one", 2 : "two"}
->>> d2 = {3 : "Three", 4 : "Four"}
->>> d3 = dict(d1, **d2)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: keyword arguments must be strings
+----------------------------------
+Decorators:
+A decorator is a function that takes another function as an argument and adds some kind of functionality, 
+and returns another function, all of this without altering the source code of the original function 
+that you passed in.
 
-# no error - replace integers with strings.
->>> d1 = {"1" : "one", "2" : "two"}
->>> d2 = {"3" : "Three", "4" : "Four"}
->>> dict(d1, **d2)
-{'3': 'Three', '4': 'Four', '1': 'one', '2': 'two'}
+Example:
+def decorator_function(original_function):
+	def wrapper_function():
+		print('wrapper executed this before display')     
+		return original_function() 
+	return wrapper_function
+
+@decorator_function # equivalent to "display = decorator_function(display)"
+def display():
+	print('display function ran')
+
+display()
+
+# output: 
+wrapper executed this before display
+display function ran
+---------
+Note: # when stacking two decorators (from top to bottom), the lower decorator is executed first.
+
+Why?
+Decorating our functions allows us to easily add functionality to our existing functions 
+by adding that functionality inside the wrapper.
+
+def post_gtz (f) :
+    def g (n) :
+        v = f(n)
+        assert v > 0
+        return v
+    return g
+
+The function post_gtz performs the work of "f" and get the result to check if its > 0. 
+It transforms a function "f" to a function that checks if output greater than zero. 
+That function to be returned is "g". You can think of "g" as a wrapper of "f", 
+it calls "f" in its body then check if the result if greater than 0.
+ 
+cache_1 and cahe_2
+DecoratorsT.py shows the test cases to build a cache to store the cycle lengths.
+The cache, cache_1, receives a function, f, and returns a function, g. cache_1 utilizes a cache, d.  
+Every time cache_1(f) is called, d and g are allocated and occupy their own memory locations, 
+so when g is returned you now have a function that acts as wrapper for f that utilizes a unique cache.
+
+--------------------------
+>>> def make_inc_b (j) :
+...     return lambda i : i + j
+...
+>>>
+>>> x = make_inc_b(1)(2)
+>>> x
+3
+>>> def make_inc_b (j, k) :
+...     return lambda i : i + j + k
+...
+>>> x = make_inc_b(1,2)(2)
+>>> x
+5
+>>> def make_inc_b (j) :
+...     return lambda i, k : i + k + j
+...
+>>> x = make_inc_b(1)(2,3)
+>>> x
+6
 >>>
 
+functions.py
+------------
+Lines 54-55, define make_inc_b() that receives a variable, j, and returns a lambda function which receives a variable, i, and adds it to j.
+Question? how can lambda body refers to j when it's returned?
+This is a closure where lambda copies j, the environment it's in.
 
-•	build ThetaJoin
-ThetaJoin joins corresponding rows given certain conditions.
-E.g., Given two relations:
-r with 3 rows
-s with 4 rows
-lambda u, v : u["A"] == v["C"]
-u: a row from the first relations r
-v: a row from the second relation v
-u["A"]: the value of the attribute "A" in u
-v["C"]: the value of the attribute "C" in v
+Lines 69-74, create a user-defined type, the class A, that has two methods, __init__ and inc. 
+This class is similar to the lambda i : i + j above. The __init__ method defines an instance variable j 
+and the method inc receives a variable, i, and add it to j.
 
-•	build NaturalJoin
-NaturalJoin marries rows from two relations when columns of common attributes have same values.
-r = [{"A" : 1, "B" : 4, "C" : 7},
-       {"A" : 2, "B" : 5, "C" : 8},
-       {"A" : 3, "B" : 6, "C" : 9}] # attributes A, B and C
+Lines 76-77, create an instance, x, of class A and pass 1 to it (i.e., I am making a closure myself).  
+Then ensures that x is an instance of A.   
 
-s = [{"A" : 2, "B" : 4, "D" : 7}, # attributes A, B and D
-       {"A" : 3, "B" : 5, "D" : 5},
-       {"A" :  3, "B" : 6, "D" : 6},
-       {"A" :  4, "B" : 7, "D" : 6}]
-NaturalJoin(r, s) = [{'A' :  3, 'B' : 6, 'C' : 9, 'D' : 6}]
- # r and share the attributes "A" and "B", therefore we will marry the two rows that has the same values
-# for these two attributes. row #3 of r and row # 3 of s.
-naturaljoin(r,s): marry rows from two relations when col of commnon attributes have the same value.
-Note:
------
-(1) in case of no common attributes between r and s, naturaljoin will do cross join
-(2) in case of common attributes but no common values, naturaljoin will do nothing.
-(3) in case of common attributes with common values, naturaljoin will return the common values. 
-------------------------------
-Note:
-def bp (u, v) :
-    return not any(u[k] != v[k] *for* k in u *if* k in v) # can be replaced with "retrun all(u[k] == v[k] ...)"
+Lines 79-80, stores the function x.inc in a variable inc_5 (this does not make sense in Java).
+ and ensures that inc_5 is an instance of MethodType.
 
-This predicate return true when two rows, u and v, have equal values for the same attributes, 
-False, otherwise.
-Note that in case of the two rows have completely different attributes, bp will return true.
+Lines 82-83, ensures that inc_5(2) returns 3. This case is different for function invocation 
+because self is x. Here we are also ensuring that inc_5 is applicable using map.
 
-This predicate will return true in two cases. First when there are no common attributes between the two input dictionaries or when all the common attributes have the same value.
-It will return false if there is at least one common attribute with different value.
+Lines 90-94, accesses inc via the class A and stores the result in inc_6 then ensure that inc_6 is an instance 
+of FunctionType. Then, ensure that inc_6(x, 2), i.e., we are passing object x and integer 2, is 3. 
+Note that value of x is pointed to by x and by lambda. Then,  ensure that we can pass inc_6(x, y) to map. 
+Note that "lambda y : inc_6(x, y) ..." is a closure. 
+----------
+algebra
+	elements or members
+	operations
 
-•	RegExp: is a special text string for describing a search pattern.
+integers
++, *, -, /
 
-"^b" splits if the string starts with a "b.
+algebras can be open or closed
 
-"^a" splits if the string starts with an "a" 
+integers under addition, is that closed
+yes,
+subtraction, closed
+multiplication, closed
+division, not closed
 
-Note: 
-s = "b ab\naab 123"
-r = re.compile("^a", re.M)                          # multiline
-assert str(type(r)) == "<class '_sre.SRE_Pattern'>"
-a = r.split(s)
-•	.compile: compiles a regular expression pattern into a regular expression object. 
-•	re.M: multiline. (^ and $ will match at the beginning and at the end of each line 
-        and not just at the beginning and the end of the string)
-•	_sre.SRE_Pattern: regular pattern object.
+relational algebra
+	elements or members: relations or tables
+	operations: select, project, many flavors of join
 
-Compile takes a pattern, "^a", and a multiline, "re.M", and saves the result back in r, 
-r is now will be run on a multiline string looking for any string starts with an "a".  
-r.split(s) will parse through s looking for a line that starts with an "a"  in a multiline string, 
-if it finds one, it will split into two parts, what's before the a and what's after it.  
-Note: if s = "b ab\nbbb 123", then the result stored in a will be ['b ab\nbbb 123'].
+everything is closed
 
-"3$" splits if the string ends with a "3"
-           	
-"." splits if it finds any character except for a new line
+relation or table
+
+movie table
+name, year, genre, director
+
+We need a data structure to represent the table elements. In python, we can use tuple.  
+movies = [(_,_,_,_),(_,_,_,_)] but we do not have meta data. How to solve it? 
+
+movies = [{"name" : "shane", "year" : 1949, "genre" : "western", "director" : "george stevens"},
+          {"name" : "star wars", "year" : "1977", "genre" : "western", "director" : "george lucas"}]
+•	Select
+select(relation, unary_predicate) => relation
+unary_predicate is applied to each tuple, the ones that are true will be considered. 
+
  
-"\d" splits if it finds any digit. 
+This functionality can be implemented using 
+(1) a lambda of one argument.
 
-"\D" splits it finds any non-digit. 
+the movies make after 1955
+select(movies, lambda d : d["year"] > 1955)
+# goes through list of dictionaries, invoke lambda on every dict on the list, 
+returns the one that is evaluates d["year"] > 1955 to true.
 
-"\w" splits if it finds any alphanumeric (except for a new line and spaces). 
+(2) build a function
+def foo(d): # receives a dict
+    return d["year"]>1949
 
-In the provided string:
- 
-result = re.split("\w", "b ab\naab 123")
-# result == ['', ' ', '', '\n', '', '', ' ', '', '', '']
+select(movies, foo)
+What selects needs as a second argument a function or lambda (i.e., callable).
 
-You go through the string a character at a time and whenever you find any alphanumeric, you split into two parts: what's before the current position in your string and what's after it.
- 
-Starting from the beginning of the string:
-For b, what's before it is an empty string, '', and what's after it is ' ab\naab 123' -- output the first empty string, ''.
-For the space, ' ', we do not split.
-For a, what's before it is a space, '  ', and what's after it is 'b\naab 123" -- output the space, ' '.
-For b, what's before it is an empty string, '', and what's after it is ' \naab 123' -- output the empty string, ''.
-For the newline, '\n', we do not split. 
-For a, what's before it is '\n' -- -- output the newline, '\n'.
-Continue consuming the string in this pattern.
+Exercises: 
+(1) build select (yield, list comprehension, filter)
+def select(r, up) # yield
+    for d in r:
+         if up(d):
+             yield d
 
-"\W" splits whenever it finds any non-alphanumeric.
+def select(r, up): # list comprehension
+    return (d for d in r if up(d))
 
-s = "b ab\naab 123"
-m = re.search("(a*)b([^a]*)(a*)b", s)             # * is zero or more
-assert str(type(m)) == "<class '_sre.SRE_Match'>"
-assert m.group(0) == "b ab"
-assert m.group(1) == ""
-assert m.group(2) == " "
-assert m.group(3) == "a"
-store the string "b ab\naab 123" in the variable s, run search command from re library. search takes a pattern, "(a*)b([^a]*)(a*)b", and a string, and does the following: 
-it goes through the string and try to search for the pattern. The result will be 4 groups: group(0) - group(3), the contents of these groups are as follows:
-Note: The match will consider each line in the target string separately.
-m.group(0): will contain the matches for the entire expression "(a*)b([^a]*)(a*)b". result: "b ab"
-m.group(1): will contain the matches for "(a*)". result: ""
-m.group(2): will contain the matches for "([^a]*)". result:" "
-m.group(3): will contain the matches for "(a*)". result:"a"
+def select(r, up): # filter
+    return filter(up, r)
 
-[^ ]: ^ means NOT.
+•	build project 
+Another operation is project.
+movies = [{"name" : "shane", "year" : 1949, "genre" : "western", "director" : "george stevens"},
+                 {"name" : "star wars", "year" : "1977", "genre" : "western", "director" : "george lucas"}]
+
+project(movies, "year", "name", "genre")  # this means that we need 3 out of 4 subset of column.
+
+def project (r, *t)
+
