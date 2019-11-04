@@ -1,6 +1,6 @@
 Python iterables must implement one special methods, __iter__(). 
 the "__iter__" magic function is called, for example, 
-when a for-loop starts. 
+when a for-loop starts or run a function like list.
 
 Python iterator object must implement two special methods, 
 __iter__() and __next__().
