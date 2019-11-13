@@ -23,8 +23,8 @@ relation or table
 
 Movie relations:
 Title	   Year	 Genre	    director
-Starwars   2002	 Action	George Lucas
-Shane 	   1949	 Western	George Stevens
+Starwars   2002	 Action	    George Lucas
+Shane 	   1949	 Western    George Stevens
 
 What should we do so that we can have a director once and only once (i.e., eliminate redundancy)?
 We need to build a director relationship. Each director will have an id. This id will replace their names in the movie table.
@@ -36,8 +36,8 @@ ID name
 
 movie relation
 title           year    genre    director ID
-"shane"     1949   western 2
-"star wars" 1977  western 1
+"shane"         1949    western  2
+"star wars"     1977    western  1
 
 We need a data structure to represent the table elements. In python, we can use tuple.  
 movies = [(_,_,_,_),(_,_,_,_)] but we do not have meta data. How to solve it? 
