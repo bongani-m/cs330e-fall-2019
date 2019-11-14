@@ -77,12 +77,3 @@ def select(r, up): # list comprehension
 def select(r, up): # filter
     return filter(up, r)
 
-•	build project 
-Another operation is project.
-movies = [{"name" : "shane", "year" : 1949, "genre" : "western", "director" : "george stevens"},
-                 {"name" : "star wars", "year" : "1977", "genre" : "western", "director" : "george lucas"}]
-
-project(movies, "year", "name", "genre")  # this means that we need 3 out of 4 subset of column.
-
-def project (r, *t)
-
