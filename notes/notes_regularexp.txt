@@ -1,0 +1,66 @@
+•	RegExp: is a special text string for describing a search pattern.
+
+"^b" splits if the string starts with a "b.
+
+"^a" splits if the string starts with an "a" 
+
+Note: 
+s = "b ab\naab 123"
+r = re.compile("^a", re.M)                          # multiline
+assert str(type(r)) == "<class '_sre.SRE_Pattern'>"
+a = r.split(s)
+•	.compile: compiles a regular expression pattern into a regular expression object. 
+•	re.M: multiline. (^ and $ will match at the beginning and at the end of each line 
+        and not just at the beginning and the end of the string)
+•	_sre.SRE_Pattern: regular pattern object.
+
+Compile takes a pattern, "^a", and a multiline, "re.M", and saves the result back in r, 
+r is now will be run on a multiline string looking for any string starts with an "a".  
+r.split(s) will parse through s looking for a line that starts with an "a"  in a multiline string, 
+if it finds one, it will split into two parts, what's before the a and what's after it.  
+Note: if s = "b ab\nbbb 123", then the result stored in a will be ['b ab\nbbb 123'].
+
+"3$" splits if the string ends with a "3"
+           	
+"." splits if it finds any character except for a new line
+ 
+"\d" splits if it finds any digit. 
+
+"\D" splits it finds any non-digit. 
+
+"\w" splits if it finds any alphanumeric (except for a new line and spaces). 
+
+In the provided string:
+ 
+result = re.split("\w", "b ab\naab 123")
+# result == ['', ' ', '', '\n', '', '', ' ', '', '', '']
+
+You go through the string a character at a time and whenever you find any alphanumeric, you split into two parts: what's before the current position in your string and what's after it.
+ 
+Starting from the beginning of the string:
+For b, what's before it is an empty string, '', and what's after it is ' ab\naab 123' -- output the first empty string, ''.
+For the space, ' ', we do not split.
+For a, what's before it is a space, '  ', and what's after it is 'b\naab 123" -- output the space, ' '.
+For b, what's before it is an empty string, '', and what's after it is ' \naab 123' -- output the empty string, ''.
+For the newline, '\n', we do not split. 
+For a, what's before it is '\n' -- -- output the newline, '\n'.
+Continue consuming the string in this pattern.
+
+"\W" splits whenever it finds any non-alphanumeric.
+
+s = "b ab\naab 123"
+m = re.search("(a*)b([^a]*)(a*)b", s)             # * is zero or more
+assert str(type(m)) == "<class '_sre.SRE_Match'>"
+assert m.group(0) == "b ab"
+assert m.group(1) == ""
+assert m.group(2) == " "
+assert m.group(3) == "a"
+store the string "b ab\naab 123" in the variable s, run search command from re library. search takes a pattern, "(a*)b([^a]*)(a*)b", and a string, and does the following: 
+it goes through the string and try to search for the pattern. The result will be 4 groups: group(0) - group(3), the contents of these groups are as follows:
+Note: The match will consider each line in the target string separately.
+m.group(0): will contain the matches for the entire expression "(a*)b([^a]*)(a*)b". result: "b ab"
+m.group(1): will contain the matches for "(a*)". result: ""
+m.group(2): will contain the matches for "([^a]*)". result:" "
+m.group(3): will contain the matches for "(a*)". result:"a"
+
+[^ ]: ^ means NOT.
