@@ -16,15 +16,15 @@
         "city": {
           "type": "string"
         }
-      },
-      "children": {
-        "type": "array",
-        "items": [
-          {
-            "type": "string"
-          }
-        ]
       }
+    },
+    "children": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
     }
   }
 }
