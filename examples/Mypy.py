@@ -18,7 +18,16 @@ can be perfect for a small project or for writing the UI of your program, for ex
 program grows, you can adapt tricky application logic to static typing to help maintenance.
 -http://mypy.readthedocs.io/en/latest/faq.html
 -------------
+Install mypy "pip install mypy"
 
+Mypy will type check your code statically: this means that it will 
+check for errors without ever running your code, just like a linter.
+
+if you try directly running mypy on your existing Python code, 
+it will most likely report little to no errors: you must add type 
+annotations to your code to take full advantage of mypy. 
+"""
+"""
 Dynamically Typed Hello World
 """
 def hello(name):
@@ -32,12 +41,18 @@ Statically Typed Hello World
 def s_hello(name: str) -> str:
    return 'Hello ' + name
 
-print(hello('World'))
+print(s_hello('World'))
 
 try :
    print(hello(1)) #Type Check Error
 except TypeError :
    pass
+
+try :
+   print(s_hello(1)) #incompatible type "int"; expected "str"
+except TypeError :
+   pass
+
 
 from typing import Any
 def one():
