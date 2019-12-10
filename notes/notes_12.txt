@@ -51,3 +51,34 @@ Afterward, whenever you try to navigate this object, You'll get an
 instance of the inner class with the original variable values. 
 ------
 
+Note:
+#Given an iterable, x, using "if x" does not work for user-defined iterables. 
+# Example.
+class iterable: 
+      def __iter__(self): 
+          return iter([])
+          
+x = iterable()
+if x :
+   print("full")
+else :
+   print("empty")
+# full
+
+def a_for (x) :
+   for a in x :
+      print("inside for")
+
+def a_while (x) :
+    p = iter(x)
+    try :
+        while True :
+            w = next(p)
+            print("inside while")
+    except StopIteration :
+        pass
+
+x = iterable()
+a_for(x)
+a_while(x)
+cycle_for(x)   

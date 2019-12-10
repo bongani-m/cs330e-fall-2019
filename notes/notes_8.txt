@@ -64,3 +64,12 @@ on an iterator but not on an iterable:
 a = [1,2,3]
 next(a) # TypeError: 'list' object is not an iterator
 assert next(iter(a)) == 1 # this works
+
+5. Testing if an iterator is empty using "if x", where x is an iterator is wrong.
+
+x = iter([1, 2])
+# testing whether the iterator x is empty using "if x" will use up the elements of x
+if x :
+   print("x is not empty and it has the following values".format(list(x)))
+
+Output: x is not empty and it has the following values
