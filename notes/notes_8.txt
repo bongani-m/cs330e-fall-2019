@@ -40,5 +40,27 @@ Traceback (most recent call last):
 StopIteration
 >>>
 -----
+Notes:
 
+1. Use len() to check if an iterable is empty (len(iterable) == 0). 
+The function len() can be used on lists but not on iterable objects in general:
+ 
+b = iter([1,2,3]) # b is both an iterator and an iterable.
+len(b) # TypeError: object of type 'list_iterator' has no len()
 
+b = iter([1,2,3])
+assert list(filter(lambda x: x % 2 == 0, b)) == [2] # this works for the real filter
+
+2. A common mistake is to compare the iterable to the empty list (iterable == []) 
+while iterable can be tuples, sets, ...
+
+3. Another common one is to convert the iterable to a list (list(iterable) == []). 
+This works for all finite iterable objects but won't work for infinite iterable objects 
+(such as in count or repeat).
+
+4. it's wrong to use next() on an iterable. The function next() can be used 
+on an iterator but not on an iterable:
+
+a = [1,2,3]
+next(a) # TypeError: 'list' object is not an iterator
+assert next(iter(a)) == 1 # this works
